@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Stack;
 
 /**
  * 
@@ -21,18 +22,17 @@ public class SymptomTree {
 	}
 
 	// methods
-	public void insert(String symptom, int points) { //inserts symptom and value
-		Node newNode = new Node(symptom, points);
+	public void insert(String symptom, int points, int place) { // WORKING!
+		Node newNode = new Node(symptom, points, place);
 		if (root == null) {
 			root = newNode;
-			size++;
 			return;
 		}
 		Node current = root;
 		Node parent = null;
 		while (true) {
 			parent = current;
-			if (points < current.points) {
+			if (place < current.place) {
 				current = current.left;
 				if (current == null) {
 					parent.left = newNode;
@@ -51,23 +51,25 @@ public class SymptomTree {
 
 	}
 
-	public int find(String symptom) { //finds symptom name for severity points
-		Node focus = root; //FIX FIND THING TO LOOK AT ALL NODES
-
-		while (focus.symptom.compareTo(symptom) != 0) {
-			if (focus.symptom.compareTo(symptom) > 0) {
-				focus = focus.left;
+	public int find(Node node, String symptom) { //finds symptom name for severity points
+		if (node == null) {
+			return 0;
+		}
+		while (node.symptom.compareTo(symptom) != 0) {
+			if (node.symptom.compareTo(symptom) > 0) {
+				node = node.left;
 			} else {
-				focus = focus.right;
+				node = node.right;
 			}
-			if (focus == null) {
-				return 0;
-			}
-			if (focus.symptom.equals(symptom)) {
-				return focus.points;
+			if (node.symptom.equals(symptom)) {
+				return node.points;
 			}
 		}
-		return focus.points;
+		return node.points;
+	}
+	
+	public int nodeToInt(Node node) {
+		return node.points;
 	}
 	
 	public ArrayList<String> list(Node root) { //lists all symptoms from tree for combobox
@@ -93,14 +95,16 @@ public class SymptomTree {
 	// NODE CLASS
 	class Node {
 		Node left, right;
+		int place;
 		String symptom;
 		int points; // severity scale
 
-		Node(String symptom, int points) {
+		Node(String symptom, int points, int place) {
 			left = null;
 			right = null;
 			this.symptom = symptom;
 			this.points = points;
+			this.place = place;
 		}
 	}
 
