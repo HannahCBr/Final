@@ -1,6 +1,7 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.PriorityQueue;
 
 import javax.swing.*;
 
@@ -44,8 +45,9 @@ public class PatientFrame extends JFrame{
 	JPanel panel = new JPanel();
 	
 	SymptomTree external = new SymptomTree();
+	PriorityQueue<Object> queue = new PriorityQueue<>();
 	public PatientFrame() {
-		external.insert("1st Degree Burn", 5);external.insert("2nd Degree Burn", 50);external.insert("3rd Degree Burn", 95);external.insert("Animal Bite", 40);external.insert("Broken Bone Protrusion", 75);external.insert("Cyst", 5);external.insert("Joint Dislocation", 15);external.insert("Lost Limb", 100);external.insert("Necrotic Tissue", 90);external.insert("Stab Wound:Critical", 100);external.insert("Stab Wound:Non-critical", 65);
+		external.insert("1st Degree Burn", 5, 1);external.insert("2nd Degree Burn", 50, 2);external.insert("3rd Degree Burn", 95, 3);external.insert("Animal Bite", 40, 4);external.insert("Broken Bone Protrusion", 75, 5);external.insert("Cyst", 5, 6);external.insert("Joint Dislocation", 15, 7);external.insert("Lost Limb", 100, 8);external.insert("Necrotic Tissue", 90, 9);external.insert("Stab Wound:Critical", 100, 10);external.insert("Stab Wound:Non-critical", 65, 11);
 		
 		
 		panel.add(fName);
@@ -95,21 +97,23 @@ public class PatientFrame extends JFrame{
 			} else {
 				if (externalChoice.getSelectedItem() != null) {
 					patient.setS1((String) externalChoice.getSelectedItem());
-					one = external.find((String) externalChoice.getSelectedItem());
+					one = external.find(external.root,(String) externalChoice.getSelectedItem());
 				}
 				if (externalChoice2.isVisible()==true) {
 					patient.setS2((String) externalChoice2.getSelectedItem());
-					two = external.find((String)externalChoice2.getSelectedItem());
+					two = external.find(external.root,(String)externalChoice2.getSelectedItem());
 				}
 				if (externalChoice3.isVisible()==true) {
 					patient.setS3((String) externalChoice3.getSelectedItem());
-					three = external.find((String)externalChoice3.getSelectedItem());
+					three = external.find(external.root,(String)externalChoice3.getSelectedItem());
 				}
 				patient.setTotal(external.math(one, two, three));
 				System.out.println(patient.total);
 			}
 			System.out.println(patient.toString());
+			//queue.add(patient);
 			
+			fNameField.setText("");lNameField.setText("");
 		}
 		
 	}
