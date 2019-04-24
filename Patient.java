@@ -1,6 +1,6 @@
 
-public class Patient {
-	String fName, lName, s1, s2, s3;
+public class Patient implements Comparable<Patient>{
+	String fName, lName;
 	int total;
 	
 	
@@ -10,45 +10,17 @@ public class Patient {
 	/**
 	 * @param fName
 	 * @param lName
-	 * @param s1
 	 */
-	public Patient(String fName, String lName, String s1) {
+	public Patient(String fName, String lName) {
 		this.fName = fName;
 		this.lName = lName;
-		this.s1 = s1;
-	}
-	/**
-	 * @param fName
-	 * @param lName
-	 * @param s1
-	 * @param s2
-	 */
-	public Patient(String fName, String lName, String s1, String s2) {
-		this.fName = fName;
-		this.lName = lName;
-		this.s1 = s1;
-		this.s2 = s2;
-	}
-	/**
-	 * @param fName
-	 * @param lName
-	 * @param s1
-	 * @param s2
-	 * @param s3
-	 */
-	public Patient(String fName, String lName, String s1, String s2, String s3) { //used to find symptoms and searching
-		this.fName = fName;
-		this.lName = lName;
-		this.s1 = s1;
-		this.s2 = s2;
-		this.s3 = s3;
 	}
 	/**
 	 * @param fName
 	 * @param lName
 	 * @param total
 	 */
-	public Patient(String fName, String lName, int total) { //used for priority queue
+	public Patient(int total, String fName, String lName) { //used for priority queue
 		this.fName = fName;
 		this.lName = lName;
 		this.total = total;
@@ -81,42 +53,6 @@ public class Patient {
 		this.lName = lName;
 	}
 	/**
-	 * @return the s1
-	 */
-	public String getS1() {
-		return s1;
-	}
-	/**
-	 * @param s1 the s1 to set
-	 */
-	public void setS1(String s1) {
-		this.s1 = s1;
-	}
-	/**
-	 * @return the s2
-	 */
-	public String getS2() {
-		return s2;
-	}
-	/**
-	 * @param s2 the s2 to set
-	 */
-	public void setS2(String s2) {
-		this.s2 = s2;
-	}
-	/**
-	 * @return the s3
-	 */
-	public String getS3() {
-		return s3;
-	}
-	/**
-	 * @param s3 the s3 to set
-	 */
-	public void setS3(String s3) {
-		this.s3 = s3;
-	}
-	/**
 	 * @return the total
 	 */
 	public int getTotal() {
@@ -133,7 +69,17 @@ public class Patient {
 	 */
 	@Override
 	public String toString() {
-		return "Patient [fName=" + fName + ", lName=" + lName + ", s1=" + s1 + ", s2=" + s2 + ", s3=" + s3 + "]";
+		return "fName=" + fName + ", lName=" + lName + ", total=" +total+" ";
+	}
+	@Override
+	public int compareTo(Patient o) {
+		if (this.getTotal()<o.getTotal()) {
+			return 1;
+		} else if (this.getTotal()>o.getTotal()) {
+			return -1;
+		} else {
+			return 0;
+		}
 	}
 
 
