@@ -22,7 +22,7 @@ public class SymptomTree {
 	}
 
 	// methods
-	public void insert(String symptom, int points, int place) { // WORKING!
+	public void insert(String symptom, int points, int place) {
 		Node newNode = new Node(symptom, points, place);
 		if (root == null) {
 			root = newNode;
