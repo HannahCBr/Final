@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Stack;
 
 /**
  * 
@@ -22,6 +21,11 @@ public class SymptomTree {
 	}
 
 	// methods
+	/**
+	 * @param symptom
+	 * @param points
+	 * @param place
+	 */
 	public void insert(String symptom, int points, int place) {
 		Node newNode = new Node(symptom, points, place);
 		if (root == null) {
@@ -51,6 +55,11 @@ public class SymptomTree {
 
 	}
 
+	/**
+	 * @param node
+	 * @param symptom
+	 * @return
+	 */
 	public int find(Node node, String symptom) { //finds symptom name for severity points
 		if (node == null) {
 			return 0;
@@ -68,10 +77,18 @@ public class SymptomTree {
 		return node.points;
 	}
 	
+	/**
+	 * @param node
+	 * @return
+	 */
 	public int nodeToInt(Node node) {
 		return node.points;
 	}
 	
+	/**
+	 * @param root
+	 * @return
+	 */
 	public ArrayList<String> list(Node root) { //lists all symptoms from tree for combobox
 		ArrayList<String> string = new ArrayList<String>();
 		
@@ -88,6 +105,12 @@ public class SymptomTree {
 		return string;
 	}
 	
+	/**
+	 * @param one
+	 * @param two
+	 * @param three
+	 * @return
+	 */
 	public int math(int one, int two, int three) {
 		return one+two+three;
 	}
@@ -99,6 +122,11 @@ public class SymptomTree {
 		String symptom;
 		int points; // severity scale
 
+		/**
+		 * @param symptom
+		 * @param points
+		 * @param place
+		 */
 		Node(String symptom, int points, int place) {
 			left = null;
 			right = null;
